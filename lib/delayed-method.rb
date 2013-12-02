@@ -39,7 +39,7 @@ class DelayedMethod
       elsif defined?(ActiveRecord::Base) && object.is_a?(ActiveRecord::Base)
         raise ArgumentError.new("object need to be persisted") unless object.persisted?
         yield object.class.name, object.id
-      elsif defined?(Mongoid::Document) && object.included_modules.include?(Mongoid::Document)
+      elsif defined?(Mongoid::Document) && object.class.included_modules.include?(Mongoid::Document)
         raise ArgumentError.new("object need to be persisted") unless object.persisted?
         yield object.class.name, object.id
       else
